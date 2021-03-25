@@ -1,0 +1,133 @@
+.modal-box {
+  /* position: fixed;
+    top: 100px; */
+  background-image: linear-gradient(to left top, #e0c3fc 0%, #8ec5fc 100%);
+  /* background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed; */
+  padding: 20px;
+  border: 2px solid black;
+  border-radius: 30px;
+  z-index: 100;
+  overflow: auto;
+  max-height: 90%;
+}
+
+.modal-box-wrapper {
+  position: fixed;
+  width: 100%;
+  right: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(128, 128, 128, 0.541);
+  z-index: 100;
+}
+
+.modal-link {
+    margin: 0 10px;
+    padding: 5px;
+    color: black;
+    background-color: #e0c3fc;
+    border-radius: 12px;
+    width: fit-content;
+    border: 2px solid black;
+    text-decoration: none;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color .5s;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.modal-link-div {
+    height: 32px;
+}
+
+.modal-link:hover {
+  background-color: #8ec5fc;
+}
+
+.modal-button-box {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.modal-text {
+  color: black;
+  font-size: 22px;
+  line-height: normal;
+  text-align: center;
+  margin: 5px;
+  width: 400px;
+}
+
+.modal-errors{
+  color: black;
+  font-size: 16px;
+  line-height: normal;
+  text-align: center;
+  margin: 2px;
+}
+
+.hidden {
+  display: none;
+  visibility: hidden;
+}
+
+.modal-form-div{
+    margin-left: 0px;
+}
+
+.modal-form-div label {
+  display: block;
+  text-decoration: underline;
+  font-size: 26px;
+  color: black;
+  margin-bottom: 1px;
+  margin-top: 5px;
+
+}
+
+.modal-form-div input {
+  border-radius: 8px;
+  padding:3px;
+  background-color: white;
+  border: 1px solid black;
+  font-size: 20px;
+  /* margin-right: 10px; */
+  width: 250px;
+  box-sizing: border-box;
+}
+
+.modal-form-div input:focus {
+  background-color: #ede6f2;;
+  outline: none;
+}
+
+.modal-form-div input::placeholder {
+  border-radius: 10px;
+  outline: none;
+}
+
+.modal-title {
+  text-align: center;
+  color: black;
+  font-size: 30px;
+  margin: 5px;
+  /* text-decoration: underline; */
+  font-weight: 600;
+}
+
+h3.modal-title{
+  text-align: center;
+  color: black;
+  font-size: 22px;
+  margin: 5px;
+  /* text-decoration: underline; */
+  font-weight: 500;
+}

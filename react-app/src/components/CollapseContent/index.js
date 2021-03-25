@@ -9,7 +9,7 @@ const Collapse = ({ collapsedInit = true, largerText = false, displayStatus = tr
     return (
         <div className={'collapse-wrapper'}>
             <div className={largerText ? 'collapse-header-large' : 'collapse-header'}>
-                <div onMouseUp={() => setCollapsed(!collapsed)}>
+                <div onClickCapture={(e) => setCollapsed(!collapsed)}>
                     {collapsed &&
                         <i className="fas fa-plus collapse-button" ></i>
                     }

@@ -1,10 +1,12 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import lists from './lists'
+import modals from './modals'
 
 //Here we setup redux for the site
 const rootReducer = combineReducers({
-    lists
+    lists,
+    modals
 });
 
 let enhancer;
