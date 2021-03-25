@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from app.models import List, db
 from app.forms import ListCreateForm
+from .utils import retrieve_error_messages
 
 list_routes = Blueprint('lists', __name__)
 
@@ -28,7 +29,7 @@ def list_create():
         db.session.commit()
         return newList.to_dict()
 
-    error_msgs = form.errors
+    error_msgs = retrieve_error_messages(form.errors)
     return {'errors': error_msgs}
 
 
@@ -47,7 +48,7 @@ def lists_get_one(id):
 @list_routes.route('/<int:id>', methods=['DELETE'])
 def lists_delete(id):
     """
-    Retrieves and returns information on the specified list
+    Deletes the specified list
     """
     selected_list = List.query.get(id)
     if selected_list:
