@@ -3,6 +3,7 @@ import Collapse from '../CollapseContent'
 import Task from '../Task'
 import {setListModal} from '../../store/modals'
 import { useDispatch } from 'react-redux'
+import { deleteList } from '../../store/lists'
 //This component wraps information to allow for it to be collapsible
 const List = ({ listData }) => {
     const dispatch = useDispatch()
@@ -11,7 +12,7 @@ const List = ({ listData }) => {
             <div className='basic-button-container'>
                 <button className='basic-button'>Add Task</button>
                 <button className='basic-button' onClick={() => dispatch(setListModal(true, listData))}>Edit List</button>
-                <button className='basic-button'>Delete List</button>
+                <button className='basic-button' onClick={() => dispatch(deleteList(listData.id))}>Delete List</button>
             </div>
             {listData.tasks.map(task => {
                 return (

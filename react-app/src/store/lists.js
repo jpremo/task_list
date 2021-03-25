@@ -2,6 +2,7 @@ const UPDATELISTS = '/lists/updatelists'
 const EDITTASK = '/lists/editTask'
 const ADDLIST = '/lists/addList'
 const EDITLIST = '/lists/editList'
+const DELETELIST = '/lists/deleteList'
 
 const updateLists = (data) => ({
     type: UPDATELISTS,
@@ -20,6 +21,11 @@ const addList = (data) => ({
 
 const editList = (data) => ({
     type: EDITLIST,
+    payload: data
+});
+
+const removeList = (data) => ({
+    type: DELETELIST,
     payload: data
 });
 
@@ -87,6 +93,19 @@ export const updateList = (id, title) => async (dispatch) => {
     }
 };
 
+export const deleteList = (id) => async (dispatch) => {
+    const response = await fetch(`/api/lists/${id}`, {
+        method: 'DELETE',
+    });;
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(removeList(data.id));
+        return data
+    } else {
+        return data
+    }
+};
+
 const initialState = [];
 
 function reducer(state = initialState, action) {
@@ -110,6 +129,10 @@ function reducer(state = initialState, action) {
             newState = [...state]
             idx = newState.findIndex((list) => list.id === action.payload.id)
             newState[idx] = action.payload
+            return newState;
+        case DELETELIST:
+            newState = [...state]
+            newState = newState.filter((list) => list.id !== action.payload)
             return newState;
         default:
             return state;

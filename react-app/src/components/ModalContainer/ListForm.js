@@ -29,7 +29,6 @@ const ListForm = ({ editing, editingInfo }) => {
         }else {
             res = await dispatch(createList(title))
         }
-        debugger
         if (!res.errors) {
             dispatch(closeModal(false))
         } else {
