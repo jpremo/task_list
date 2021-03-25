@@ -13,13 +13,13 @@ export const loadLists = () => async (dispatch) => {
     }
 };
 
-const initialState = { lists: undefined };
+const initialState = [];
 
 function reducer(state = initialState, action) {
     let newState;
     switch (action.type) {
         case UPDATELISTS:
-            newState = Object.assign({}, state, { ...action.payload });
+            newState = action.payload
             return newState;
         default:
             return state;
