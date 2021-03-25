@@ -1,3 +1,3 @@
 from .lists import ListCreateForm
-from .comments import CommentCreateForm
-from .tasks import TaskCreateForm
+from .comments import CommentCreateForm, CommentUpdateForm
+from .tasks import TaskCreateForm, TaskUpdateForm

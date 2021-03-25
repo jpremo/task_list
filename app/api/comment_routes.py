@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.models import Comment, db
-from app.forms import CommentCreateForm
+from app.forms import CommentCreateForm, CommentUpdateForm
 from .utils import retrieve_error_messages
 
 comment_routes = Blueprint('comments', __name__)
@@ -19,7 +19,7 @@ def comments_create():
         return comment.to_dict()
 
     error_msgs = retrieve_error_messages(form.errors)
-    return {'errors': error_msgs}
+    return {'errors': error_msgs}, 400
 
 
 @comment_routes.route('/<int:id>', methods=['GET'])
@@ -33,6 +33,26 @@ def comments_get_one(id):
 
     return {'errors': 'resource not found'}, 404
 
+
+@comment_routes.route('/<int:id>', methods=['PUT'])
+def comments_update(id):
+    """
+    Updates the specified comment
+    """
+    form = CommentUpdateForm(csrf_enabled=False)
+    if form.validate_on_submit():
+        data = request.get_json(force=True)
+        comment = Comment.query.get(id)
+
+        if comment:
+            comment.body = data['body']
+            db.session.commit()
+            return comment.to_dict()
+
+        return {'errors': 'resource not found'}, 404
+
+    error_msgs = retrieve_error_messages(form.errors)
+    return {'errors': error_msgs}, 400
 
 @comment_routes.route('/<int:id>', methods=['DELETE'])
 def comments_delete(id):

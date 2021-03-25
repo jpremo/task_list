@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from app.models import Task, db
-from app.forms import TaskCreateForm
+from app.forms import TaskCreateForm, TaskUpdateForm
 from .utils import retrieve_error_messages
 
 task_routes = Blueprint('tasks', __name__)
@@ -21,7 +21,7 @@ def tasks_create():
         return task.to_dict()
 
     error_msgs = retrieve_error_messages(form.errors)
-    return {'errors': error_msgs}
+    return {'errors': error_msgs}, 400
 
 
 @task_routes.route('/<int:id>', methods=['GET'])
@@ -35,6 +35,27 @@ def tasks_get_one(id):
 
     return {'errors': 'resource not found'}, 404
 
+
+@task_routes.route('/<int:id>', methods=['PUT'])
+def tasks_update(id):
+    """
+    Updates specified task
+    """
+    form = TaskUpdateForm(csrf_enabled=False)
+    if form.validate_on_submit():
+        data = request.get_json(force=True)
+        task = Task.query.get(id)
+        if task:
+            task.title = data['title']
+            task.description = data['description']
+            task.completed = data['completed']
+            db.session.commit()
+            return task.to_dict()
+
+        return {'errors': 'resource not found'}, 404
+
+    error_msgs = retrieve_error_messages(form.errors)
+    return {'errors': error_msgs}, 400
 
 @task_routes.route('/<int:id>', methods=['DELETE'])
 def tasks_delete(id):

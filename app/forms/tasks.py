@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField
+from wtforms import StringField, IntegerField, BooleanField
 from wtforms.validators import DataRequired, ValidationError, Length
 from app.models import List
 
@@ -20,3 +20,14 @@ class TaskCreateForm(FlaskForm):
         Length(max=500, message="description may not exceed 500 characters.")])
     listId = IntegerField('listId', validators=[
         DataRequired(message="listId is required."), list_exists])
+
+
+class TaskUpdateForm(FlaskForm):
+    title = StringField('title', validators=[
+        DataRequired(message="title is required."),
+        Length(max=50, message="title may not exceed 50 characters.")])
+    description = StringField('description', validators=[
+        DataRequired(message="description is required."),
+        Length(max=500, message="description may not exceed 500 characters.")])
+    completed = BooleanField('completed', validators=[
+        DataRequired(message="completed is required.")])

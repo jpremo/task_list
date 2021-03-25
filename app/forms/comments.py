@@ -17,3 +17,9 @@ class CommentCreateForm(FlaskForm):
         Length(max=200, message="body may not exceed 200 characters.")])
     taskId = IntegerField('taskId', validators=[
         DataRequired(message="taskId is required."), task_exists])
+
+
+class CommentUpdateForm(FlaskForm):
+    body = StringField('body', validators=[
+        DataRequired(message="body is required."),
+        Length(max=200, message="body may not exceed 200 characters.")])

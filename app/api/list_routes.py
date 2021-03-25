@@ -30,7 +30,7 @@ def list_create():
         return newList.to_dict()
 
     error_msgs = retrieve_error_messages(form.errors)
-    return {'errors': error_msgs}
+    return {'errors': error_msgs}, 400
 
 
 @list_routes.route('/<int:id>', methods=['GET'])
@@ -44,6 +44,24 @@ def lists_get_one(id):
 
     return {'errors': 'resource not found'}, 404
 
+
+@list_routes.route('/<int:id>', methods=['PUT'])
+def list_update(id):
+    """
+    Updates the specified list
+    """
+    form = ListCreateForm(csrf_enabled=False)
+    if form.validate_on_submit():
+        data = request.get_json(force=True)
+        selected_list = List.query.get(id)
+        if selected_list:
+            selected_list.title = data['title']
+            db.session.commit()
+            return selected_list.to_dict()
+        return {'errors': 'resource not found'}, 404
+
+    error_msgs = retrieve_error_messages(form.errors)
+    return {'errors': error_msgs}, 400
 
 @list_routes.route('/<int:id>', methods=['DELETE'])
 def lists_delete(id):
