@@ -1,6 +1,7 @@
 const UPDATELISTS = '/lists/updatelists'
 const EDITTASK = '/lists/editTask'
 const ADDLIST = '/lists/addList'
+const EDITLIST = '/lists/editList'
 
 const updateLists = (data) => ({
     type: UPDATELISTS,
@@ -14,6 +15,11 @@ const editTask = (data) => ({
 
 const addList = (data) => ({
     type: ADDLIST,
+    payload: data
+});
+
+const editList = (data) => ({
+    type: EDITLIST,
     payload: data
 });
 
@@ -58,12 +64,12 @@ export const createList = (title) => async (dispatch) => {
         dispatch(addList(data));
         return data
     } else {
-        return data.errors
+        return data
     }
 };
 
-export const updateList = (title) => async (dispatch) => {
-    const response = await fetch(`/api/lists/`, {
+export const updateList = (id, title) => async (dispatch) => {
+    const response = await fetch(`/api/lists/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -74,10 +80,10 @@ export const updateList = (title) => async (dispatch) => {
     });;
     const data = await response.json()
     if (response.ok) {
-        dispatch(addList(data));
+        dispatch(editList(data));
         return data
     } else {
-        return data.errors
+        return data
     }
 };
 
@@ -85,6 +91,7 @@ const initialState = [];
 
 function reducer(state = initialState, action) {
     let newState;
+    let idx
     switch (action.type) {
         case UPDATELISTS:
             newState = action.payload
@@ -98,6 +105,11 @@ function reducer(state = initialState, action) {
         case ADDLIST:
             newState = [...state]
             newState.push(action.payload)
+            return newState;
+        case EDITLIST:
+            newState = [...state]
+            idx = newState.findIndex((list) => list.id === action.payload.id)
+            newState[idx] = action.payload
             return newState;
         default:
             return state;

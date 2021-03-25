@@ -1,13 +1,13 @@
 import React from 'react';
 import './ModalContainer.css'
 import ListForm from './ListForm'
-const ModalContainer = ({ modalType, editing}) => {
+const ModalContainer = ({ modalType, editing, editingInfo}) => {
     if (modalType) {
         return (
             <div className='modal-box-wrapper'>
                 <div className='modal-box'>
                     {modalType === 'list' &&
-                        <ListForm editing={editing}/>
+                        <ListForm editing={editing} editingInfo={editingInfo}/>
                     }
                     {/* {modalType === 'task' &&
                         <TaskForm editing={editing} />

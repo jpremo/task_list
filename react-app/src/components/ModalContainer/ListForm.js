@@ -1,28 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { closeModal } from '../../store/modals'
 import { createList, updateList } from '../../store/lists'
 
 //login form component; used inside of ModalContainer
-const ListForm = ({ editing }) => {
+const ListForm = ({ editing, editingInfo }) => {
     const [errors, setErrors] = useState([]);
     const [title, setTitle] = useState("");
+    const [loaded, setLoaded] = useState(false)
     const dispatch = useDispatch()
     const cancel = (e) => {
         dispatch(closeModal(false))
     }
 
+    useEffect(() => {
+        if(editing) {
+            setTitle(editingInfo.title)
+        }
+        setLoaded(true)
+    }, [])
+
     const submitForm = async (e) => {
         e.preventDefault();
-        debugger
         let res
         if(editing){
-            res = await dispatch(updateList(title))
+            res = await dispatch(updateList(editingInfo.id, title))
         }else {
             res = await dispatch(createList(title))
         }
-
+        debugger
         if (!res.errors) {
             dispatch(closeModal(false))
         } else {

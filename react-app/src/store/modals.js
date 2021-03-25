@@ -1,8 +1,8 @@
 const EDITMODAL = '/modals/editModal'
 
-export const setListModal = (editingBool) => ({
+export const setListModal = (editingBool, editingInfo = null) => ({
     type: EDITMODAL,
-    payload: { modalType: 'list', editing: editingBool }
+    payload: { modalType: 'list', editing: editingBool, editingInfo }
 });
 
 export const setLTaskModal = (editingBool) => ({

@@ -26,7 +26,7 @@ const HomePage = () => {
 
     return (
         <div id='homepage-wrapper'>
-            <ModalContainer modalType={modals.modalType} editing={modals.editing}>
+            <ModalContainer modalType={modals.modalType} editing={modals.editing} editingInfo={modals.editingInfo}>
                 <div>test</div>
             </ModalContainer>
             <div id='lists-wrapper'>
