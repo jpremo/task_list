@@ -13,6 +13,6 @@ class Comment(db.Model):
   def to_dict(self):
     return {
         "id": self.id,
-        "body": self.title,
+        "body": self.body,
         "taskId": self.task.id
     }

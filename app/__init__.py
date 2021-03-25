@@ -9,6 +9,8 @@ from .seeds import seed_commands
 
 from .config import Config
 
+from .api.list_routes import list_routes
+
 app = Flask(__name__)
 
 
@@ -18,6 +20,9 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 db.init_app(app)
 Migrate(app, db)
+
+#setting route prefixes
+app.register_blueprint(list_routes, url_prefix='/api/lists')
 
 # Application Security
 CORS(app)
