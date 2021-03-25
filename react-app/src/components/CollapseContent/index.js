@@ -2,20 +2,26 @@ import React, { useState } from 'react'
 import './CollapseContent.css'
 
 //This component wraps information to allow for it to be collapsible
-const Collapse = ({collapsedInit=true, largerText=false, title, children}) => {
+const Collapse = ({ collapsedInit = true, largerText = false, displayStatus = true,
+    status = false, title, children }) => {
     const [collapsed, setCollapsed] = useState(collapsedInit)
 
     return (
         <div className={'collapse-wrapper'}>
-            <div className={'collapse-header'} onClick={() => setCollapsed(!collapsed)}>
-                {collapsed &&
-                    <i className="fas fa-plus collapse-button"></i>
-                }
-                {!collapsed &&
-                    <i className="fas fa-minus collapse-button"></i>
+            <div className={largerText ? 'collapse-header-large' : 'collapse-header'}>
+                <div onClick={() => setCollapsed(!collapsed)}>
+                    {collapsed &&
+                        <i className="fas fa-plus collapse-button" ></i>
+                    }
+                    {!collapsed &&
+                        <i className="fas fa-minus collapse-button"></i>
 
+                    }
+                </div>
+                <h3>{title}</h3>
+                {displayStatus &&
+                    <div className={status ? 'circle completed' : 'circle incomplete'}></div>
                 }
-                <h3 className={largerText ? 'collapse-title-large' : 'collapse-title'}>{title}</h3>
             </div>
 
             {!collapsed &&
