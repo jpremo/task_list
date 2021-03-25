@@ -4,7 +4,8 @@ import Comment from '../Comment'
 import { swapStatus } from '../../store/lists'
 import './Task.css'
 import { useDispatch } from 'react-redux'
-//This component wraps information to allow for it to be collapsible
+import { setTaskModal } from '../../store/modals'
+
 const Task = ({ taskData }) => {
     const dispatch = useDispatch()
     const toggleStatus = async () => {
@@ -13,6 +14,11 @@ const Task = ({ taskData }) => {
 
     return (
         <Collapse title={taskData.title} status={taskData.completed}>
+            <div className='basic-button-container'>
+                <button className='basic-button' onClick={() => dispatch(setTaskModal(false, taskData))}>Add Comment</button>
+                <button className='basic-button' onClick={() => dispatch(setTaskModal(true, taskData))}>Edit Task</button>
+                <button className='basic-button' onClick={() => dispatch(setTaskModal(true, taskData))}>Delete Task</button>
+            </div>
             <div className='task-description'>{taskData.description}</div>
             <div className='task-completion'>
                 <label htmlFor='completion-status'>Completed:</label>

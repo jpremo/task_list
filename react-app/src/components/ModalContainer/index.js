@@ -1,6 +1,7 @@
 import React from 'react';
 import './ModalContainer.css'
 import ListForm from './ListForm'
+import TaskForm from './TaskForm'
 const ModalContainer = ({ modalType, editing, editingInfo}) => {
     if (modalType) {
         return (
@@ -9,10 +10,10 @@ const ModalContainer = ({ modalType, editing, editingInfo}) => {
                     {modalType === 'list' &&
                         <ListForm editing={editing} editingInfo={editingInfo}/>
                     }
-                    {/* {modalType === 'task' &&
-                        <TaskForm editing={editing} />
+                    {modalType === 'task' &&
+                        <TaskForm editing={editing} editingInfo={editingInfo}/>
                     }
-                    {modalType === 'comment' &&
+                    {/* {modalType === 'comment' &&
                         <CommentForm editing={editing} />
                     } */}
                 </div>

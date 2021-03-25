@@ -1,29 +1,31 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux'
 import { closeModal } from '../../store/modals'
-import { createList, updateList } from '../../store/lists'
+import { createTask, updateTask } from '../../store/lists'
 
 const ListForm = ({ editing, editingInfo }) => {
     const [errors, setErrors] = useState([]);
     const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
     const dispatch = useDispatch()
     const cancel = (e) => {
         dispatch(closeModal(false))
     }
 
     useEffect(() => {
-        if(editing) {
+        if (editing) {
             setTitle(editingInfo.title)
+            setDescription(editingInfo.description)
         }
     }, [])
 
     const submitForm = async (e) => {
         e.preventDefault();
         let res
-        if(editing){
-            res = await dispatch(updateList(editingInfo.id, title))
-        }else {
-            res = await dispatch(createList(title))
+        if (editing) {
+            res = await dispatch(updateTask(editingInfo.id, title, description, editingInfo.completed))
+        } else {
+            res = await dispatch(createTask(title, description, editingInfo.id))
         }
         if (!res.errors) {
             dispatch(closeModal(false))
@@ -34,6 +36,10 @@ const ListForm = ({ editing, editingInfo }) => {
 
     const updateTitle = (e) => {
         setTitle(e.target.value);
+    };
+
+    const updateDescription = (e) => {
+        setDescription(e.target.value);
     };
 
     return (
@@ -52,16 +58,28 @@ const ListForm = ({ editing, editingInfo }) => {
                     placeholder="Title"
                     value={title}
                     onChange={updateTitle}
+                    maxLength={50}
                 />
             </div>
-                <div className='modal-button-box'>
-                    <div className='modal-link-div'>
-                        <div className='modal-link modal-button' onClick={submitForm}>Submit</div>
-                    </div>
-                    <div className='modal-link-div'>
-                        <div className='modal-link modal-button' onClick={cancel}> Close</div>
-                    </div>
+            <div className='modal-form-div'>
+                <label htmlFor="description">Description</label>
+                <textarea
+                    className='modal-form-text-area'
+                    name="description"
+                    placeholder="(optional)"
+                    value={description}
+                    onChange={updateDescription}
+                    maxLength={500} />
+                <div className='word-counter'>{description.length}/500</div>
+            </div>
+            <div className='modal-button-box'>
+                <div className='modal-link-div'>
+                    <div className='modal-link modal-button' onClick={submitForm}>Submit</div>
                 </div>
+                <div className='modal-link-div'>
+                    <div className='modal-link modal-button' onClick={cancel}> Close</div>
+                </div>
+            </div>
         </form >
     );
 };

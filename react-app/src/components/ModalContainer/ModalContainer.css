@@ -131,3 +131,24 @@ h3.modal-title{
   /* text-decoration: underline; */
   font-weight: 500;
 }
+
+#modal-form-text-area {
+  border-radius: 8px;
+  padding: 3px;
+  background-color: white;
+  border: 1px solid black;
+  font-size: 20px;
+  box-sizing: border-box;
+  width: 520px;
+  height: 80px;
+}
+
+#modal-form-text-area:focus {
+  background-color: #ede6f2;
+  outline: none;
+}
+
+#modal-form-text-area::placeholder {
+  border-radius: 10px;
+  outline: none;
+}

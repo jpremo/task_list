@@ -5,9 +5,9 @@ export const setListModal = (editingBool, editingInfo = null) => ({
     payload: { modalType: 'list', editing: editingBool, editingInfo }
 });
 
-export const setLTaskModal = (editingBool) => ({
+export const setTaskModal = (editingBool, editingInfo) => ({
     type: EDITMODAL,
-    payload: { modalType: 'task', editing: editingBool }
+    payload: { modalType: 'task', editing: editingBool, editingInfo }
 });
 
 export const setCommentModal = (editingBool) => ({

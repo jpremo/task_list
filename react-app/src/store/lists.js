@@ -3,6 +3,7 @@ const EDITTASK = '/lists/editTask'
 const ADDLIST = '/lists/addList'
 const EDITLIST = '/lists/editList'
 const DELETELIST = '/lists/deleteList'
+const ADDTASK = '/lists/addTask'
 
 const updateLists = (data) => ({
     type: UPDATELISTS,
@@ -26,6 +27,11 @@ const editList = (data) => ({
 
 const removeList = (data) => ({
     type: DELETELIST,
+    payload: data
+});
+
+const addTask = (data) => ({
+    type: ADDTASK,
     payload: data
 });
 
@@ -106,6 +112,48 @@ export const deleteList = (id) => async (dispatch) => {
     }
 };
 
+export const createTask = (title, description, listId) => async (dispatch) => {
+    const response = await fetch(`/api/tasks/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title,
+            description,
+            listId
+        })
+    });;
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(addTask(data));
+        return data
+    } else {
+        return data
+    }
+};
+
+export const updateTask = (id, title, description, completed) => async (dispatch) => {
+    const response = await fetch(`/api/tasks/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title,
+            description,
+            completed
+        })
+    });;
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(editTask(data));
+        return data
+    } else {
+        return data
+    }
+};
+
 const initialState = [];
 
 function reducer(state = initialState, action) {
@@ -114,12 +162,6 @@ function reducer(state = initialState, action) {
     switch (action.type) {
         case UPDATELISTS:
             newState = action.payload
-            return newState;
-        case EDITTASK:
-            newState = [...state]
-            let idx1 = newState.findIndex((list) => list.id === action.payload.listId)
-            let idx2 = newState[idx1].tasks.findIndex((task) => task.id === action.payload.id)
-            newState[idx1].tasks[idx2] = action.payload
             return newState;
         case ADDLIST:
             newState = [...state]
@@ -133,6 +175,17 @@ function reducer(state = initialState, action) {
         case DELETELIST:
             newState = [...state]
             newState = newState.filter((list) => list.id !== action.payload)
+            return newState;
+        case ADDTASK:
+            newState = [...state]
+            idx = newState.findIndex((list) => list.id === action.payload.listId)
+            newState[idx].tasks.push(action.payload)
+            return newState;
+        case EDITTASK:
+            newState = [...state]
+            let idx1 = newState.findIndex((list) => list.id === action.payload.listId)
+            let idx2 = newState[idx1].tasks.findIndex((task) => task.id === action.payload.id)
+            newState[idx1].tasks[idx2] = action.payload
             return newState;
         default:
             return state;

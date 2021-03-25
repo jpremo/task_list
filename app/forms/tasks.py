@@ -16,7 +16,6 @@ class TaskCreateForm(FlaskForm):
                         DataRequired(message="title is required."),
                         Length(max=50, message="title may not exceed 50 characters.")])
     description = StringField('description', validators=[
-        DataRequired(message="description is required."),
         Length(max=500, message="description may not exceed 500 characters.")])
     listId = IntegerField('listId', validators=[
         DataRequired(message="listId is required."), list_exists])
@@ -27,7 +26,6 @@ class TaskUpdateForm(FlaskForm):
         DataRequired(message="title is required."),
         Length(max=50, message="title may not exceed 50 characters.")])
     description = StringField('description', validators=[
-        DataRequired(message="description is required."),
         Length(max=500, message="description may not exceed 500 characters.")])
     completed = BooleanField('completed', validators=[
         AnyOf(values=[True, False], message="completed must be true or false")])
