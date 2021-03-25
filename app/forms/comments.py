@@ -12,7 +12,7 @@ def task_exists(form, field):
 
 
 class CommentCreateForm(FlaskForm):
-    body = StringField('title', validators=[
+    body = StringField('body', validators=[
         DataRequired(message="body is required."),
         Length(max=200, message="body may not exceed 200 characters.")])
     taskId = IntegerField('taskId', validators=[

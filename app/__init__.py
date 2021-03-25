@@ -11,6 +11,7 @@ from .config import Config
 
 from .api.list_routes import list_routes
 from .api.comment_routes import comment_routes
+from .api.task_routes import task_routes
 
 app = Flask(__name__)
 
@@ -25,6 +26,7 @@ Migrate(app, db)
 #setting route prefixes
 app.register_blueprint(list_routes, url_prefix='/api/lists')
 app.register_blueprint(comment_routes, url_prefix='/api/comments')
+app.register_blueprint(task_routes, url_prefix='/api/tasks')
 
 # Application Security
 CORS(app)
