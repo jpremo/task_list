@@ -30,3 +30,29 @@ def list_create():
 
     error_msgs = form.errors
     return {'errors': error_msgs}
+
+
+@list_routes.route('/<int:id>', methods=['GET'])
+def lists_get_one(id):
+    """
+    Retrieves and returns information on the specified list
+    """
+    selected_list = List.query.get(id)
+    if selected_list:
+        return selected_list.to_dict()
+
+    return {'errors': 'resource not found'}, 404
+
+
+@list_routes.route('/<int:id>', methods=['DELETE'])
+def lists_delete(id):
+    """
+    Retrieves and returns information on the specified list
+    """
+    selected_list = List.query.get(id)
+    if selected_list:
+        db.session.delete(selected_list)
+        db.session.commit()
+        return {'msg': 'resource successfully deleted', 'id': id}
+
+    return {'errors': 'resource not found'}, 404
