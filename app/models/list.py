@@ -5,7 +5,8 @@ class List(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   title = db.Column(db.String(50), nullable=False)
-  tasks = db.relationship("Task", back_populates="currentList")
+  tasks = db.relationship(
+      "Task", back_populates="currentList", cascade="all, delete-orphan")
 
   def to_dict(self):
     dict_tasks = []

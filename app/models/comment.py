@@ -6,7 +6,7 @@ class Comment(db.Model):
 
   id = db.Column(db.Integer, primary_key=True)
   taskId = db.Column(
-      db.Integer, db.ForeignKey("lists.id"), nullable=False)
+      db.Integer, db.ForeignKey("tasks.id"), nullable=False)
   body = db.Column(db.String(200), nullable=False)
   task = db.relationship("Task", back_populates="comments")
 
