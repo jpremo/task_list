@@ -9,7 +9,7 @@ const Collapse = ({ collapsedInit = true, largerText = false, displayStatus = tr
     return (
         <div className={'collapse-wrapper'}>
             <div className={largerText ? 'collapse-header-large' : 'collapse-header'}>
-                <div onClick={() => setCollapsed(!collapsed)}>
+                <div onMouseUp={() => setCollapsed(!collapsed)}>
                     {collapsed &&
                         <i className="fas fa-plus collapse-button" ></i>
                     }
@@ -20,7 +20,7 @@ const Collapse = ({ collapsedInit = true, largerText = false, displayStatus = tr
                 </div>
                 <h3>{title}</h3>
                 {displayStatus &&
-                    <div className={status ? 'circle completed' : 'circle incomplete'}></div>
+                    <div className={status ? 'circle complete' : 'circle incomplete'}></div>
                 }
             </div>
 

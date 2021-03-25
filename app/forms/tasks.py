@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, BooleanField
-from wtforms.validators import DataRequired, ValidationError, Length
+from wtforms.validators import DataRequired, ValidationError, Length, AnyOf
 from app.models import List
 
 
@@ -30,4 +30,4 @@ class TaskUpdateForm(FlaskForm):
         DataRequired(message="description is required."),
         Length(max=500, message="description may not exceed 500 characters.")])
     completed = BooleanField('completed', validators=[
-        DataRequired(message="completed is required.")])
+        AnyOf(values=[True, False], message="completed must be true or false")])

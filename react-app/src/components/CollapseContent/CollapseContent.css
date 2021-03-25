@@ -28,5 +28,22 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  margin: 10px;
 }
 
+.circle{
+  width: 20px;
+  height: 20px;
+  border-radius: 20px;
+  margin-left: 15px;
+  /* border: 1px solid black; */
+  box-shadow: 1px 1px black;
+}
+
+.complete{
+  background-color: green;
+}
+
+.incomplete{
+  background-color: red;
+}
