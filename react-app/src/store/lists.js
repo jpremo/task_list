@@ -192,7 +192,6 @@ export const deleteTask = (task) => async (dispatch) => {
 };
 
 export const createComment = (body, task) => async (dispatch) => {
-    debugger
     const response = await fetch(`/api/comments/`, {
         method: 'POST',
         headers: {
@@ -278,7 +277,6 @@ function reducer(state = initialState, action) {
             newState[idx1].tasks[idx2] = action.payload
             return newState;
         case DELETETASK:
-            debugger
             newState = [...state]
             idx = newState.findIndex((list) => list.id === action.payload.listId)
             newState[idx].tasks = newState[idx].tasks.filter((task) => task.id !== action.payload.id)

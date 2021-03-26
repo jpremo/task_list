@@ -20,7 +20,10 @@ const Collapse = ({ collapsedInit = true, largerText = false, displayStatus = tr
                 </div>
                 <h3>{title}</h3>
                 {displayStatus &&
-                    <div className={status ? 'circle complete' : 'circle incomplete'}></div>
+                <div className={status ? 'complete' : 'incomplete'}>
+                <i className={status ? 'fas fa-check' : 'fas fa-times'} ></i>
+                </div>
+                    // <div className={status ? 'circle complete' : 'circle incomplete'}></div>
                 }
             </div>
 

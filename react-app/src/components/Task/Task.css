@@ -1,7 +1,53 @@
 .task-description{
-    font-size: 28px;
+    font-size: 22px;
+    max-width: 90%;
+    overflow-wrap: break-word;
+    white-space:pre-wrap;
+    margin-left: 50px;
+    padding: 10px 0;
 }
 
 .task-completion{
     font-size: 20px;
+    margin: 10px 0 15px 0;
+}
+
+.basic-button.smaller-text{
+    font-size: 14px;
+    padding: 3px;
+    margin: 0 5px
+}
+
+.task-subheader{
+    font-size: 24px;
+    font-weight: bold;
+    align-self: flex-start;
+}
+
+.task-content-wrapper{
+    max-width: 90%;
+    width: auto;
+    align-self: flex-start;
+    margin: 5px;
+}
+
+.task-comments-list{
+    margin-left:50px;
+    padding: 10px 0;
+}
+
+.task-comments-list li{
+    /* list-style-type: square; */
+    border-bottom: 1px solid black;
+}
+
+.task-comments-list > li:first-of-type{
+    border-top: 1px solid black;
+}
+
+.task-no-comments{
+    margin-left: 50px;
+    font-size: 20px;
+    padding: 10px 0;
+    margin-bottom: 10px;
 }
