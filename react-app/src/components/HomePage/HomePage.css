@@ -3,8 +3,10 @@
     justify-content: center;
     width: 100%;
 }
+
 #lists-wrapper{
     display: flex;
     justify-content: center;
     width: 80%;
+    flex-wrap: wrap;
 }

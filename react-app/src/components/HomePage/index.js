@@ -4,7 +4,6 @@ import { loadLists } from '../../store/lists';
 import { setListModal } from '../../store/modals';
 import List from '../List'
 import ModalContainer from '../ModalContainer';
-import Modal from '../ModalContainer'
 import './HomePage.css'
 const HomePage = () => {
     const [loaded, setLoaded] = useState(false);
@@ -29,8 +28,8 @@ const HomePage = () => {
             <ModalContainer modalType={modals.modalType} editing={modals.editing} editingInfo={modals.editingInfo}>
                 <div>test</div>
             </ModalContainer>
+                {/* <button className='basic-button' onClick={() => dispatch(setListModal(false))}>Create List</button> */}
             <div id='lists-wrapper'>
-                <button className='basic-button' onClick={() => dispatch(setListModal(false))}>Create List</button>
                 {lists.map(list => {
                     return (
                         <>
