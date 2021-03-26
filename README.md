@@ -1,3 +1,8 @@
+# To Do List Application #
+[GitHub Repo](https://github.com/jpremo/task_list)
+
+[Live Site](https://task-list-demo-jpremo.herokuapp.com)
+
 ## Installation ##
 1. Clone the GitHub repository.
 2. Create a database user with your desired password using PostgreSQL.
