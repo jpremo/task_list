@@ -7,6 +7,7 @@ const ADDTASK = '/lists/addTask'
 const DELETETASK = '/lists/deleteTask'
 const ADDCOMMENT = '/lists/addComment'
 const EDITCOMMENT = '/lists/editComment'
+const DELETECOMMENT = '/lists/deleteComment'
 
 const updateLists = (data) => ({
     type: UPDATELISTS,
@@ -50,6 +51,11 @@ const addComment = (data, listId) => ({
 
 const editComment = (data) => ({
     type: EDITCOMMENT,
+    payload: data
+});
+
+const removeComment = (data) => ({
+    type: DELETECOMMENT,
     payload: data
 });
 
@@ -225,7 +231,18 @@ export const updateComment = (id, body) => async (dispatch) => {
     }
 };
 
-
+export const deleteComment = (comment) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${comment.id}`, {
+        method: 'DELETE',
+    });;
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(removeComment(comment));
+        return data
+    } else {
+        return data
+    }
+};
 
 const initialState = [];
 
@@ -274,11 +291,16 @@ function reducer(state = initialState, action) {
             return newState;
         case EDITCOMMENT:
             newState = [...state]
-            newState = [...state]
             idx1 = newState.findIndex((list) => list.id === action.payload.listId)
             idx2 = newState[idx1].tasks.findIndex((task) => task.id === action.payload.taskId)
             idx3 = newState[idx1].tasks[idx2].comments.findIndex((comment) => comment.id === action.payload.id)
             newState[idx1].tasks[idx2].comments[idx3] = action.payload
+            return newState;
+        case DELETECOMMENT:
+            newState = [...state]
+            idx1 = newState.findIndex((list) => list.id === action.payload.listId)
+            idx2 = newState[idx1].tasks.findIndex((task) => task.id === action.payload.taskId)
+            newState[idx1].tasks[idx2].comments = newState[idx1].tasks[idx2].comments.filter((comment) => comment.id !== action.payload.id)
             return newState;
         default:
             return state;
