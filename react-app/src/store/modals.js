@@ -15,6 +15,11 @@ export const setCommentModal = (editingBool, editingInfo = null) => ({
     payload: { modalType: 'comment', editing: editingBool, editingInfo }
 });
 
+export const deleteModal = (deleteType, deleteInfo) => ({
+    type: EDITMODAL,
+    payload: { modalType: 'deleting', deleteType, deleteInfo }
+});
+
 export const closeModal = () => ({
     type: EDITMODAL,
     payload: { modalType: null, editing: false }

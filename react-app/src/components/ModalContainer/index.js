@@ -3,6 +3,7 @@ import './ModalContainer.css'
 import ListForm from './ListForm'
 import TaskForm from './TaskForm'
 import CommentForm from './CommentForm'
+import DeleteForm from './DeleteForm'
 const ModalContainer = ({ modalType, editing, editingInfo}) => {
     if (modalType) {
         return (
@@ -16,6 +17,9 @@ const ModalContainer = ({ modalType, editing, editingInfo}) => {
                     }
                     {modalType === 'comment' &&
                         <CommentForm editing={editing} editingInfo={editingInfo}/>
+                    }
+                    {modalType === 'deleting' &&
+                        <DeleteForm editing={editing} editingInfo={editingInfo} />
                     }
                 </div>
             </div>

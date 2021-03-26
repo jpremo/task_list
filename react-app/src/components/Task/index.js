@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Collapse from '../CollapseContent'
 import Comment from '../Comment'
-import { deleteTask, swapStatus } from '../../store/lists'
+import { swapStatus } from '../../store/lists'
 import './Task.css'
 import { useDispatch } from 'react-redux'
-import { setTaskModal, setCommentModal } from '../../store/modals'
+import { setTaskModal, setCommentModal, deleteModal } from '../../store/modals'
 
 const Task = ({ taskData }) => {
     const dispatch = useDispatch()
@@ -38,7 +38,7 @@ const Task = ({ taskData }) => {
                 <div className='basic-button-container'>
                     <button className='basic-button smaller-text' onClick={() => dispatch(setCommentModal(false, taskData))}>Add Comment</button>
                     <button className='basic-button smaller-text' onClick={() => dispatch(setTaskModal(true, taskData))}>Edit Task</button>
-                    <button className='basic-button smaller-text' onClick={() => dispatch(deleteTask(taskData))}>Delete Task</button>
+                    <button className='basic-button smaller-text' onClick={() => dispatch(deleteModal('task', taskData))}>Delete Task</button>
                 </div>
                 <div className='task-completion'>
                     <label htmlFor='completion-status'>Task Completed?</label>

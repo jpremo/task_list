@@ -144,3 +144,9 @@ h3.modal-title{
   border-radius: 10px;
   outline: none;
 }
+
+.modal-confirm{
+  font-size: 35px;
+  max-width: 400px;
+  text-align: center;
+}
