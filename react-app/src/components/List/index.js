@@ -11,16 +11,19 @@ const List = ({ listData }) => {
     return (
         <div className='list-wrapper'>
             <Collapse title={listData.title} collapsedInit={false} largerText={true} displayStatus={false}>
-                <div className='basic-button-container'>
-                    <button className='basic-button' onClick={() => dispatch(setTaskModal(false, listData))}>Add Task</button>
-                    <button className='basic-button' onClick={() => dispatch(setListModal(true, listData))}>Edit List</button>
-                    <button className='basic-button' onClick={() => dispatch(deleteList(listData.id))}>Delete List</button>
-                </div>
+                {listData.tasks.length === 0 &&
+                    <div className='list-no-task-text'>There are no tasks in this list!</div>
+                }
                 {listData.tasks.map(task => {
                     return (
                         <Task taskData={task} key={task.id} />
                     )
                 })}
+                <div className='basic-button-container'>
+                    <button className='basic-button' onClick={() => dispatch(setTaskModal(false, listData))}>Add Task</button>
+                    <button className='basic-button' onClick={() => dispatch(setListModal(true, listData))}>Edit List</button>
+                    <button className='basic-button' onClick={() => dispatch(deleteList(listData.id))}>Delete List</button>
+                </div>
             </Collapse>
         </div>
     )

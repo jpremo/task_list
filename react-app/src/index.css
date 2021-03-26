@@ -53,3 +53,23 @@ body{
 	font-family: 'Times New Roman', Times, serif;
 	background-color: #F5F5DD;
 }
+
+.basic-button{
+	background-color: #c77d59;
+	color: black;
+	margin: 0 5px;
+	border: 2px solid black;
+	border-radius: 8px;
+	padding: 5px;
+	font-size: 16px;
+	transition: background-color .5s, box-shadow .5s;
+}
+
+.basic-button:focus{
+	outline: none;
+}
+
+.basic-button:hover{
+	box-shadow: 1px 1px black;
+	background-color: #a86b4c;
+}
