@@ -231,7 +231,7 @@ const initialState = [];
 
 function reducer(state = initialState, action) {
     let newState;
-    let idx, idx1, idx2
+    let idx, idx1, idx2, idx3
     switch (action.type) {
         case UPDATELISTS:
             newState = action.payload
@@ -274,9 +274,11 @@ function reducer(state = initialState, action) {
             return newState;
         case EDITCOMMENT:
             newState = [...state]
-            // let idx1 = newState.findIndex((list) => list.id === action.payload.listId)
-            // let idx2 = newState[idx1].tasks.findIndex((task) => task.id === action.payload.id)
-            // newState[idx1].tasks[idx2] = action.payload
+            newState = [...state]
+            idx1 = newState.findIndex((list) => list.id === action.payload.listId)
+            idx2 = newState[idx1].tasks.findIndex((task) => task.id === action.payload.taskId)
+            idx3 = newState[idx1].tasks[idx2].comments.findIndex((comment) => comment.id === action.payload.id)
+            newState[idx1].tasks[idx2].comments[idx3] = action.payload
             return newState;
         default:
             return state;

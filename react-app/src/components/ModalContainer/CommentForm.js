@@ -13,7 +13,7 @@ const ListForm = ({ editing, editingInfo }) => {
 
     useEffect(() => {
         if (editing) {
-            setBody(editingInfo.description)
+            setBody(editingInfo.body)
         }
     }, [])
 
