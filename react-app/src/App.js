@@ -6,8 +6,8 @@ function App() {
 
   return (
     <>
-      <TitleBar />
       <BrowserRouter>
+        <TitleBar />
         <Switch>
           <Route path="/" exact={true}>
             <HomePage />
