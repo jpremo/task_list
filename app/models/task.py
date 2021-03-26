@@ -11,7 +11,7 @@ class Task(db.Model):
   description = db.Column(db.String(500), nullable=True)
   completed = db.Column(db.Boolean, nullable=False, default=False)
   comments = db.relationship(
-      "Comment", back_populates="task", cascade="all, delete-orphan")
+      "Comment", back_populates="task", cascade="all, delete-orphan", order_by="asc(Comment.id)")
   currentList = db.relationship("List", back_populates="tasks")
 
   def to_dict(self):

@@ -11,7 +11,7 @@ def lists_get():
     """
     Retrieves and returns information on all lists
     """
-    lists = List.query.all()
+    lists = List.query.order_by(List.id.asc()).all()
     legible_lists = [l.to_dict() for l in lists]
     return {'lists': legible_lists}
 
