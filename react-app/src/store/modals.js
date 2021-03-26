@@ -5,14 +5,14 @@ export const setListModal = (editingBool, editingInfo = null) => ({
     payload: { modalType: 'list', editing: editingBool, editingInfo }
 });
 
-export const setTaskModal = (editingBool, editingInfo) => ({
+export const setTaskModal = (editingBool, editingInfo = null) => ({
     type: EDITMODAL,
     payload: { modalType: 'task', editing: editingBool, editingInfo }
 });
 
-export const setCommentModal = (editingBool) => ({
+export const setCommentModal = (editingBool, editingInfo = null) => ({
     type: EDITMODAL,
-    payload: { modalType: 'comment', editing: editingBool }
+    payload: { modalType: 'comment', editing: editingBool, editingInfo }
 });
 
 export const closeModal = () => ({

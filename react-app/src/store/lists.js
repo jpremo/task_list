@@ -4,6 +4,9 @@ const ADDLIST = '/lists/addList'
 const EDITLIST = '/lists/editList'
 const DELETELIST = '/lists/deleteList'
 const ADDTASK = '/lists/addTask'
+const DELETETASK = '/lists/deleteTask'
+const ADDCOMMENT = '/lists/addComment'
+const EDITCOMMENT = '/lists/editComment'
 
 const updateLists = (data) => ({
     type: UPDATELISTS,
@@ -32,6 +35,21 @@ const removeList = (data) => ({
 
 const addTask = (data) => ({
     type: ADDTASK,
+    payload: data
+});
+
+const removeTask = (data) => ({
+    type: DELETETASK,
+    payload: data
+});
+
+const addComment = (data, listId) => ({
+    type: ADDCOMMENT,
+    payload: data
+});
+
+const editComment = (data) => ({
+    type: EDITCOMMENT,
     payload: data
 });
 
@@ -154,11 +172,66 @@ export const updateTask = (id, title, description, completed) => async (dispatch
     }
 };
 
+export const deleteTask = (task) => async (dispatch) => {
+    const response = await fetch(`/api/tasks/${task.id}`, {
+        method: 'DELETE',
+    });;
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(removeTask(task));
+        return data
+    } else {
+        return data
+    }
+};
+
+export const createComment = (body, task) => async (dispatch) => {
+    debugger
+    const response = await fetch(`/api/comments/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            body,
+            taskId: task
+        })
+    });;
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(addComment(data));
+        return data
+    } else {
+        return data
+    }
+};
+
+export const updateComment = (id, body) => async (dispatch) => {
+    const response = await fetch(`/api/comments/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            body
+        })
+    });;
+    const data = await response.json()
+    if (response.ok) {
+        dispatch(editComment(data));
+        return data
+    } else {
+        return data
+    }
+};
+
+
+
 const initialState = [];
 
 function reducer(state = initialState, action) {
     let newState;
-    let idx
+    let idx, idx1, idx2
     switch (action.type) {
         case UPDATELISTS:
             newState = action.payload
@@ -183,9 +256,27 @@ function reducer(state = initialState, action) {
             return newState;
         case EDITTASK:
             newState = [...state]
-            let idx1 = newState.findIndex((list) => list.id === action.payload.listId)
-            let idx2 = newState[idx1].tasks.findIndex((task) => task.id === action.payload.id)
+            idx1 = newState.findIndex((list) => list.id === action.payload.listId)
+            idx2 = newState[idx1].tasks.findIndex((task) => task.id === action.payload.id)
             newState[idx1].tasks[idx2] = action.payload
+            return newState;
+        case DELETETASK:
+            debugger
+            newState = [...state]
+            idx = newState.findIndex((list) => list.id === action.payload.listId)
+            newState[idx].tasks = newState[idx].tasks.filter((task) => task.id !== action.payload.id)
+            return newState;
+        case ADDCOMMENT:
+            newState = [...state]
+            idx1 = newState.findIndex((list) => list.id === action.payload.listId)
+            idx2 = newState[idx1].tasks.findIndex((task) => task.id === action.payload.taskId)
+            newState[idx1].tasks[idx2].comments.push(action.payload)
+            return newState;
+        case EDITCOMMENT:
+            newState = [...state]
+            // let idx1 = newState.findIndex((list) => list.id === action.payload.listId)
+            // let idx2 = newState[idx1].tasks.findIndex((task) => task.id === action.payload.id)
+            // newState[idx1].tasks[idx2] = action.payload
             return newState;
         default:
             return state;

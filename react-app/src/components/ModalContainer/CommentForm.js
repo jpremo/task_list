@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from 'react-redux'
 import { closeModal } from '../../store/modals'
-import { createTask, updateTask } from '../../store/lists'
+import { createComment, updateComment } from '../../store/lists'
 
 const ListForm = ({ editing, editingInfo }) => {
     const [errors, setErrors] = useState([]);
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+    const [body, setBody] = useState("");
     const dispatch = useDispatch()
     const cancel = (e) => {
         dispatch(closeModal(false))
@@ -14,8 +13,7 @@ const ListForm = ({ editing, editingInfo }) => {
 
     useEffect(() => {
         if (editing) {
-            setTitle(editingInfo.title)
-            setDescription(editingInfo.description)
+            setBody(editingInfo.description)
         }
     }, [])
 
@@ -23,9 +21,9 @@ const ListForm = ({ editing, editingInfo }) => {
         e.preventDefault();
         let res
         if (editing) {
-            res = await dispatch(updateTask(editingInfo.id, title, description, editingInfo.completed))
+            res = await dispatch(updateComment(editingInfo.id, body))
         } else {
-            res = await dispatch(createTask(title, description, editingInfo.id))
+            res = await dispatch(createComment(body, editingInfo.id))
         }
         if (!res.errors) {
             dispatch(closeModal(false))
@@ -34,43 +32,28 @@ const ListForm = ({ editing, editingInfo }) => {
         }
     };
 
-    const updateTitle = (e) => {
-        setTitle(e.target.value);
-    };
-
-    const updateDescription = (e) => {
-        setDescription(e.target.value);
+    const updateBody = (e) => {
+        setBody(e.target.value);
     };
 
     return (
         <form onSubmit={submitForm}>
-            <h1 className='modal-title'>{editing ? 'Edit Task' : 'Create Task'}</h1>
+            <h1 className='modal-title'>{editing ? 'Edit Comment' : 'Create Comment'}</h1>
             <div>
                 {errors.map((error, ind) => (
                     <div key={ind}>{error}</div>
                 ))}
             </div>
             <div className='modal-form-div'>
-                <label htmlFor="title">Title</label>
-                <input
-                    name="title"
-                    type="text"
-                    placeholder="Title"
-                    value={title}
-                    onChange={updateTitle}
-                    maxLength={50}
-                />
-            </div>
-            <div className='modal-form-div'>
-                <label htmlFor="description">Description</label>
+                <label htmlFor="body">Body</label>
                 <textarea
                     className='modal-form-text-area'
-                    name="description"
-                    placeholder="(optional)"
-                    value={description}
-                    onChange={updateDescription}
-                    maxLength={500} />
-                <div className='word-counter'>{description.length}/500</div>
+                    name="body"
+                    placeholder=""
+                    value={body}
+                    onChange={updateBody}
+                    maxLength={200} />
+                <div className='word-counter'>{body.length}/200</div>
             </div>
             <div className='modal-button-box'>
                 <div className='modal-link-div'>

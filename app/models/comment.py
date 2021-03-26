@@ -14,5 +14,6 @@ class Comment(db.Model):
     return {
         "id": self.id,
         "body": self.body,
-        "taskId": self.task.id
+        "taskId": self.task.id,
+        "listId": self.task.listId
     }
