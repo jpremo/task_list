@@ -28,7 +28,7 @@ const ListForm = ({ editing, editingInfo }) => {
         if (!res.errors) {
             dispatch(closeModal(false))
         } else {
-            setErrors(res.errors);
+            setErrors(res.errors.map(el => el.charAt(0).toUpperCase() + el.slice(1)));
         }
     };
 
@@ -52,6 +52,7 @@ const ListForm = ({ editing, editingInfo }) => {
                     placeholder="Title"
                     value={title}
                     onChange={updateTitle}
+                    maxLength={50}
                 />
             </div>
                 <div className='modal-button-box'>

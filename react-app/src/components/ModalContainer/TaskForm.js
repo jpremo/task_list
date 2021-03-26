@@ -30,7 +30,7 @@ const ListForm = ({ editing, editingInfo }) => {
         if (!res.errors) {
             dispatch(closeModal(false))
         } else {
-            setErrors(res.errors);
+            setErrors(res.errors.map(el => el.charAt(0).toUpperCase() + el.slice(1)));
         }
     };
 

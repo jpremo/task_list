@@ -1,10 +1,5 @@
 .modal-box {
-  /* position: fixed;
-    top: 100px; */
-  background-image: linear-gradient(to left top, #e0c3fc 0%, #8ec5fc 100%);
-  /* background-size: cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed; */
+  background-image: linear-gradient(to left top, #EBDEC7 0%, #F5F5DD 100%);
   padding: 20px;
   border: 2px solid black;
   border-radius: 30px;
@@ -30,7 +25,7 @@
     margin: 0 10px;
     padding: 5px;
     color: black;
-    background-color: #e0c3fc;
+    background-color: #c77d59;
     border-radius: 12px;
     width: fit-content;
     border: 2px solid black;
@@ -48,7 +43,7 @@
 }
 
 .modal-link:hover {
-  background-color: #8ec5fc;
+  background-color: #a86b4c;
 }
 
 .modal-button-box {
@@ -99,13 +94,12 @@
   background-color: white;
   border: 1px solid black;
   font-size: 20px;
-  /* margin-right: 10px; */
   width: 250px;
   box-sizing: border-box;
 }
 
 .modal-form-div input:focus {
-  background-color: #ede6f2;;
+  background-color: #fbf6eb;;
   outline: none;
 }
 
@@ -119,7 +113,6 @@
   color: black;
   font-size: 30px;
   margin: 5px;
-  /* text-decoration: underline; */
   font-weight: 600;
 }
 
@@ -128,27 +121,26 @@ h3.modal-title{
   color: black;
   font-size: 22px;
   margin: 5px;
-  /* text-decoration: underline; */
   font-weight: 500;
 }
 
-#modal-form-text-area {
+.modal-form-text-area {
   border-radius: 8px;
   padding: 3px;
   background-color: white;
   border: 1px solid black;
   font-size: 20px;
   box-sizing: border-box;
-  width: 520px;
-  height: 80px;
+  width: 250px;
+  height: 105px;
 }
 
-#modal-form-text-area:focus {
-  background-color: #ede6f2;
+.modal-form-text-area:focus {
+  background-color: #fbf6eb;
   outline: none;
 }
 
-#modal-form-text-area::placeholder {
+.modal-form-text-area::placeholder {
   border-radius: 10px;
   outline: none;
 }
