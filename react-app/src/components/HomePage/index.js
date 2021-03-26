@@ -19,7 +19,7 @@ const HomePage = () => {
 
     if (!loaded || !lists) {
         return (
-            <div>Loading...</div>
+            null
         )
     }
 
@@ -37,6 +37,9 @@ const HomePage = () => {
                         </>
                     )
                 })}
+                {lists.length === 0 &&
+                    <div className='no-list'>There are no remaining task lists!</div>
+                }
             </div>
         </div>
     );

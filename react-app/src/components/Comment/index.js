@@ -12,10 +12,6 @@ const Comment = ({ commentData }) => {
                 <i class="fas fa-pencil-alt comment-icon" onClick={() => dispatch(setCommentModal(true, commentData))}></i>
                 <i class="fas fa-trash-alt comment-icon" onClick={() => dispatch(deleteComment(commentData))}></i>
             </div>
-            {/* <div className='basic-button-container'>
-                <button className='basic-button' onClick={() => dispatch(setCommentModal(true, commentData))}>Edit Comment</button>
-                <button className='basic-button' onClick={() => dispatch(deleteComment(commentData))}>Delete Comment</button>
-            </div> */}
         </div>
     )
 }

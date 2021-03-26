@@ -1,4 +1,5 @@
-.collapse-header, .collapse-header-large {
+.collapse-header,
+.collapse-header-large {
   display: flex;
   align-items: center;
   align-self: start;
@@ -10,7 +11,7 @@
   width: 100%;
 }
 
-.collapse-header-large i{
+.collapse-header-large i {
   font-size: 28px;
 }
 
@@ -18,12 +19,20 @@
   font-size: 26px;
   margin-left: 5px;
   margin-right: 18px;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 80%;
+  text-align: center;
 }
 
 .collapse-header-large h3 {
   font-size: 40px;
   margin: 20px 5px;
   margin-right: 28px;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
+  max-width: 80%;
+  text-align: center;
 }
 
 .collapse-wrapper {
@@ -35,25 +44,18 @@
   width: 100%;
 }
 
-.circle{
-  width: 20px;
-  height: 20px;
-  border-radius: 20px;
-  margin-left: 15px;
-  /* border: 1px solid black; */
-  box-shadow: 1px 1px black;
-}
-
-.complete, .incomplete{
+.complete,
+.incomplete {
   font-size: 24px;
   width: 24px;
   text-align: center;
+  margin-top: 8px;
 }
 
-.complete{
-  color: green;
+.complete {
+  color: rgb(21, 200, 81);
 }
 
-.incomplete{
-  color: red;
+.incomplete {
+  color: rgb(209, 10, 10);
 }
